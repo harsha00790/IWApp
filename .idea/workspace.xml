@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0f9de85-7fdc-4b7c-b89c-569bb1548055" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/js/genericparser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/js/rxsimulator.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/js/logparams.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="IWApp.iws" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="rxsimulator.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/js/rxsimulator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="68">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="9" selection-end-column="52" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -37,11 +36,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="genericparser.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="logparams.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/js/logparams.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="genericparser.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/js/genericparser.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+            <state relative-caret-position="272">
+              <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -69,6 +80,7 @@
       <list>
         <option value="$PROJECT_DIR$/server/js/rxsimulator.js" />
         <option value="$PROJECT_DIR$/server/js/genericparser.js" />
+        <option value="$PROJECT_DIR$/server/js/logparams.js" />
       </list>
     </option>
   </component>
@@ -359,7 +371,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1463454795303</updated>
-      <workItem from="1463454796542" duration="1938000" />
+      <workItem from="1463454796542" duration="2345000" />
     </task>
     <task id="LOCAL-00001" summary="Libs added">
       <created>1463455186131</created>
@@ -382,11 +394,18 @@
       <option name="project" value="LOCAL" />
       <updated>1463455859712</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Server outline -- 1">
+      <created>1463456762929</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1463456762929</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1938000" />
+    <option name="totallyTimeSpent" value="2345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="-8" width="1868" height="1096" extended-state="6" />
@@ -428,7 +447,8 @@
     <MESSAGE value="Libs added" />
     <MESSAGE value="Libs added -- 2" />
     <MESSAGE value="Libs added -- fIXES" />
-    <option name="LAST_COMMIT_MESSAGE" value="Libs added -- fIXES" />
+    <MESSAGE value="Server outline -- 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server outline -- 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -459,20 +479,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/js/rxsimulator.js">
+    <entry file="file://$PROJECT_DIR$/server/js/genericparser.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="272">
+          <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/js/genericparser.js">
+    <entry file="file://$PROJECT_DIR$/server/js/rxsimulator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+        <state relative-caret-position="68">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="9" selection-end-column="52" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/js/logparams.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
