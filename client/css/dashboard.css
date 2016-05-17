@@ -1,0 +1,35 @@
+.dashboard-container{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-heading{
+    padding: 0;
+    margin: 0;
+    height: 50px;
+    background-color: dimgrey;
+    background-image: url("textures/concrete2.png");
+    background-repeat: repeat-x;
+}
+
+.dashboard-heading p{
+    font-family: fantasy;
+    padding-top: 0.3em;
+    font-size: 2em;
+    color: whitesmoke;
+    position: relative;
+    left: 42%;
+}
+
+.dashboard-content{
+    padding: 0;
+    margin: 0;
+    height: calc(100% - 50px);
+    overflow: auto;
+}
+
+.dashboard-content img{
+    width: 100%;
+    min-height: calc(100% - 50px);
+}
