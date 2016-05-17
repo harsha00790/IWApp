@@ -61,7 +61,7 @@ html,body {
 }
 
 body{
-    background-color: #2aabd2;
+    background-color: mintcream;
 }
 
 .main-container{
@@ -76,4 +76,50 @@ body{
     -webkit-box-shadow: 2px 0px 56px 2px rgba(61,95,107,1);
     -moz-box-shadow: 2px 0px 56px 2px rgba(61,95,107,1);
     box-shadow: 2px 0px 56px 2px rgba(61,95,107,1);
+}
+
+.main-header,
+.main-footer{
+    background-color: #28a4c9;
+    width: 100%;
+    min-height: 60px;
+    background-image: url("textures/batthern.png");
+    background-repeat: repeat-x;
+}
+
+.main-header .row{
+    margin: 0;
+    padding: 0;
+}
+
+.main-content{
+    height: calc(100% - 120px);
+    width: 100%;
+    background-color: lightgrey;
+}
+
+.main-footer{
+    position: relative;
+    bottom: 0;
+}
+
+.appicon{
+    height: 60px;
+    width: 100%;
+}
+
+.appicon img{
+    /*height: 100%;*/
+    width: auto;
+}
+
+.appname{
+    height: 100%;
+}
+
+.appname p{
+    font-family: fantasy;
+    font-size: 2em;
+    color: azure;
+    padding-top: 0.45em;
 }
