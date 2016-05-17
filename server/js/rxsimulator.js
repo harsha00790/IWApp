@@ -7,7 +7,7 @@
 * TODO: Do we need to add a log based filtering over here, decide and do anything --
 */
 
-var IWApp = typeof(IWApp == "undefined")?({}):IWApp;
+IWApp = (typeof IWApp == "undefined")?({}):IWApp;
 
 IWApp.RxSimulator = {
     LoopMode: true, // -- Whether the file should be read continuously --

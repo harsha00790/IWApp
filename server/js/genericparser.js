@@ -7,7 +7,7 @@
  * TODO: Get the core logic from the WebUI Sources --
  */
 
-var IWApp = typeof(IWApp == "undefined")?({}):IWApp;
+IWApp = (typeof IWApp == "undefined")?({}):IWApp;
 
 IWApp.GPSParser = {
     CurrentPacket: 0,

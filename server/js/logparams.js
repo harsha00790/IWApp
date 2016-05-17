@@ -7,7 +7,7 @@
 * The logs info is assumed to be stored in the MongoDB, considering we would be having a JSON --
 */
 
-var IWApp = typeof(IWApp == "undefined")?({}):IWApp;
+IWApp = (typeof IWApp == "undefined")?({}):IWApp;
 
 IWApp.LogsInfo = {
     GetDetails: function(logName, parameterName){
