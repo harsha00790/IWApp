@@ -28,3 +28,49 @@
     height: calc(100% - 50px);
     overflow: auto;
 }
+
+.createscreen-content div{
+    padding: 0;
+}
+
+.createscreen-dragtools{
+    margin: 1%;
+    width: 20%;
+    min-height: 45%;
+    float:left;
+    height: 45%;
+    background-color: #5cb85c;
+    -webkit-box-shadow: 2px 0px 56px 2px rgba(22,11,12,1);
+    -moz-box-shadow: 2px 0px 56px 2px rgba(23,12,11,1);
+    box-shadow: 2px 0px 56px 2px rgba(21,21,11,1);
+}
+
+.createscreen-drawarea{
+    /*position: relative;*/
+    /*top: -47%;*/
+    /*left: 22%;*/
+    float:right;
+    margin: 1%;
+    width: 75%;
+    min-height: 95%;
+    height: 95%;
+    background-color: #5cb85c;
+    -webkit-box-shadow: 2px 0px 56px 2px rgba(22,11,12,1);
+    -moz-box-shadow: 2px 0px 56px 2px rgba(23,12,11,1);
+    box-shadow: 2px 0px 56px 2px rgba(21,21,11,1);
+}
+
+.createscreen-configwindow{
+    /*position: relative;*/
+    /*left: 0;*/
+    float:left;
+    top: 47%;
+    margin: 1%;
+    width: 20%;
+    min-height: 45%;
+    height: 45%;
+    background-color: #5cb85c;
+    -webkit-box-shadow: 2px 0px 56px 2px rgba(22,11,12,1);
+    -moz-box-shadow: 2px 0px 56px 2px rgba(23,12,11,1);
+    box-shadow: 2px 0px 56px 2px rgba(21,21,11,1);
+}
