@@ -181,6 +181,20 @@ IWApp.CreateScreen = {
         }else{
 
         }
+
+        $(view).find("div").on("click", function(){
+            IWApp.CreateScreen.OnElementSelected($(this));
+        })
+    },
+    OnElementSelected: function(element){
+        // -- First remove the active class for all other elements --
+        $(".createscreen-drawarea-board div").removeClass("createscreen-board-activeelement");
+
+        // -- Now, set the active class for the clicked element --
+        $(element).addClass("createscreen-board-activeelement");
+
+        // -- Now, the element specific action --
+
     },
     PopulateDragTools: function(){
         // -- First things first, clear the drag tools list --
@@ -263,6 +277,9 @@ IWApp.CreateScreen = {
                 IWApp.CreateScreen.CloneElementToDA(elp, position, size);
             }
         });
+
+        // -- Setup IDs for the side panels --
+        $(".createscreen-label-config").attr("data-etype", IWApp)
     }
 };
 
