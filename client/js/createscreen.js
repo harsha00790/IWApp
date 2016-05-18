@@ -21,6 +21,24 @@ IWApp.CreateScreen = {
     OnRedoClicked: function(){
         console.log("Redo Clicked");
     },
+    CloneLabelToDA: function(position, size, element){
+        var elChildren = element.children();
+        var p = $(elChildren[0]).clone();
+        p.addClass("createscreen-dragtools-element-bg");
+
+        p.css("width", size.width);
+        p.css("height", size.height);
+
+        console.log("B" + position.left+"   " +position.top);
+        $(p).css({top: position.top, left: position.left, position:'absolute'});
+
+        $(".createscreen-drawarea-board").append(p);
+        position = $(p).position();
+        console.log("C" + position.left+"   " +position.top);
+    },
+    CloneFieldToDA: function(position, size, element){
+
+    },
     PopulateDragTools: function(){
         // -- First things first, clear the drag tools list --
         var ulist = $(".createscreen-dragtools-list");
@@ -34,7 +52,8 @@ IWApp.CreateScreen = {
         element.addClass("user-label");
         element.text("Label");
 
-        li = $("<li>");
+        li = $("<div>");
+        li.addClass("createscreen-dragtools-element-bg");
         li.append(element);
 
         ulist.append(li);
@@ -46,7 +65,8 @@ IWApp.CreateScreen = {
         element.addClass("btn-default");
         element.text("Button");
 
-        li = $("<li>");
+        li = $("<div>");
+        li.addClass("createscreen-dragtools-element-bg");
         li.append(element);
 
         ulist.append(li);
@@ -56,7 +76,8 @@ IWApp.CreateScreen = {
         element.addClass("user-label");
         element.text("Data-Field");
 
-        li = $("<li>");
+        li = $("<div>");
+        li.addClass("createscreen-dragtools-element-bg");
         li.append(element);
 
         ulist.append(li);
@@ -70,7 +91,7 @@ IWApp.CreateScreen = {
 
         // -- First, make all the li in the drag tools kit draggable --
         var uList = $(".createscreen-dragtools-list");
-        $(".createscreen-dragtools-list li").draggable({
+        $(".createscreen-dragtools-list div").draggable({
             opacity: 0.9,
             helper: function(ev, ui) {
                 var $elem = $(this);
@@ -89,6 +110,36 @@ IWApp.CreateScreen = {
 
                 return $clone;
             },
+        });
+
+        // -- Now, make the draw area droppable --
+        $(".createscreen-drawarea-board").droppable({
+            accept: ".createscreen-dragtools-list div",
+            activeClass: "createscreen-drawarea-board-hover",
+            hoverClass: "createscreen-drawarea-board-hover",
+            drop: function(event, ui){
+                var child = ((ui.draggable).children())[0];
+                if($(child).hasClass("user-label")){
+                    var elp = ui.helper.clone();
+                    ui.helper.remove();
+
+                    var size = {};
+                    size.width = $(ui.draggable).css("width");
+                    size.height = $(ui.draggable).css("height");
+
+                    var areaOffset = $(this).offset();
+                    var leftPosition  = ui.offset.left;
+                    var topPosition   = ui.offset.top;
+
+                    var position = {};
+                    position.left = leftPosition;
+                    position.top = topPosition;
+
+                    elp.appendTo($(this));
+
+                    // IWApp.CreateScreen.CloneLabelToDA(position, size, ui.draggable);
+                }
+            }
         });
     }
 };
