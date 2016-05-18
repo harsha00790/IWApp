@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0f9de85-7fdc-4b7c-b89c-569bb1548055" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/css/user.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/js/jquery.ui.touch-punch.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/css/createscreen.css" afterPath="$PROJECT_DIR$/client/css/createscreen.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/html/createscreen.html" afterPath="$PROJECT_DIR$/client/html/createscreen.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/js/createscreen.js" afterPath="$PROJECT_DIR$/client/js/createscreen.js" />
     </list>
     <ignored path="IWApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,11 +52,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="createscreen.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="createscreen.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/client/js/createscreen.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+                <state relative-caret-position="545">
+                  <caret line="87" column="19" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#44#0" expanded="false" />
                   </folding>
@@ -61,11 +64,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="createscreen.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="createscreen.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/html/createscreen.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+                <state relative-caret-position="425">
+                  <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -75,11 +78,21 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="createscreen.css" pinned="false" current-in-tab="true">
+          <file leaf-file-name="createscreen.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/css/createscreen.css">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="536">
-                  <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+                  <caret line="100" column="21" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="user.css" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/client/css/user.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="340">
+                  <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -88,7 +101,7 @@
           <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client/main.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="366">
+                <state relative-caret-position="-399">
                   <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="77" selection-end-column="51" />
                   <folding />
                 </state>
@@ -113,8 +126,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -141,9 +154,10 @@
         <option value="$PROJECT_DIR$/client/main.css" />
         <option value="$PROJECT_DIR$/client/js/_maincontainer.js" />
         <option value="$PROJECT_DIR$/client/js/dashboard.js" />
-        <option value="$PROJECT_DIR$/client/js/createscreen.js" />
-        <option value="$PROJECT_DIR$/client/css/createscreen.css" />
         <option value="$PROJECT_DIR$/client/html/createscreen.html" />
+        <option value="$PROJECT_DIR$/client/css/user.css" />
+        <option value="$PROJECT_DIR$/client/css/createscreen.css" />
+        <option value="$PROJECT_DIR$/client/js/createscreen.js" />
       </list>
     </option>
   </component>
@@ -502,6 +516,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="c0f9de85-7fdc-4b7c-b89c-569bb1548055" name="Default" comment="" />
@@ -509,7 +526,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1463454795303</updated>
-      <workItem from="1463454796542" duration="27269000" />
+      <workItem from="1463454796542" duration="33368000" />
     </task>
     <task id="LOCAL-00001" summary="Libs added">
       <created>1463455186131</created>
@@ -595,11 +612,18 @@
       <option name="project" value="LOCAL" />
       <updated>1463485085844</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="CreateScreen CSS update.">
+      <created>1463539596853</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1463539596853</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27269000" />
+    <option name="totallyTimeSpent" value="33368000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="-8" width="1868" height="1096" extended-state="6" />
@@ -815,19 +839,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/js/createscreen.js">
+    <entry file="file://$PROJECT_DIR$/client/html/createscreen.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#44#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
+        <state relative-caret-position="-399">
           <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="77" selection-end-column="51" />
           <folding />
         </state>
@@ -836,16 +858,26 @@
     <entry file="file://$PROJECT_DIR$/client/css/createscreen.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="536">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+          <caret line="100" column="21" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/html/createscreen.html">
+    <entry file="file://$PROJECT_DIR$/client/css/user.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="340">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/js/createscreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="87" column="19" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#44#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
