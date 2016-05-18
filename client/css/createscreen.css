@@ -97,6 +97,7 @@
 }
 
 .createscreen-drawarea-board{
+    position: relative;
     width: 100%;
     min-height: calc(100% - 40px);
 }
