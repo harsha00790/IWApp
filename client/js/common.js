@@ -21,4 +21,5 @@ IWApp.Common = {
 
         return "PK";
     },
+    JDataView: {}
 };

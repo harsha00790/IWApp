@@ -768,4 +768,4 @@
         };
     }
 
-})((function () { /* jshint strict: false */ return this })());
+})((function () { /* jshint strict: false */ return IWApp.Common.JDataView})());

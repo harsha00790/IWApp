@@ -5,22 +5,20 @@ logHelpers = (function(){
     {
         if(!logName)
         {
-            console.log("getIdFromName::logName not passed --undefiend");
             return -1;
         }
         var name = logName.toUpperCase();
         var tempId = logIdMap[name];
         if(!tempId)
         {
-            console.log("getIdFromName::logName not found in the map");
             return -1;
         }
-        console.log("getIdFromName----",tempId);
         return tempId;
-    }
+    };
 
     var getFieldOffsetByName = function(logName,feildName)
     {
+
         //final offset object, used to extract data from the packet.
         var offesetObject = {
             "CAAO":-1,
@@ -63,21 +61,22 @@ logHelpers = (function(){
 
         //getting particular field offset details
         var tempFieldOffset = tempData[feildName];
+        console.log("Temp Field  " + JSON.stringify(tempFieldOffset));
         if(!tempFieldOffset)
         {
             console.log("getFieldOffsetByName::given field not found in the map--",feildName);
             return offesetObject;
         }
 
-        offesetObject.DataType = tempFieldOffset.DataType;
-        offesetObject.NoOfBytes = parseInt(tempFieldOffset.NoOfBytes);
-        offesetObject.Offset = parseInt(tempFieldOffset.Offset);
+        offesetObject.DataType = tempFieldOffset.DATATYPE;
+        offesetObject.NoOfBytes = parseInt(tempFieldOffset.NOOFBYTES);
+        offesetObject.Offset = parseInt(tempFieldOffset.OFFSET);
         offesetObject.status = true;
 
         console.log("offesetObject-----FOUND--for------",logName,feildName,"---------",offesetObject);
 
         return offesetObject;
-    }
+    };
 
     //for test purpose...
     //getIdFromName("SITEUPDATENUMBER");
@@ -86,10 +85,33 @@ logHelpers = (function(){
     var getFieldOffsetById = function ()
     {
 
-    }
+    };
+
+    // -- Function to get the list of all the lgos which ahve the list of params and other supporting data --
+    var getLogsList = function()
+    {
+        var keys = Object.keys(offsetMap);
+        return keys;
+    };
+
+    var getParamsForLog = function(logName)
+    {
+        logName = logName.toUpperCase();
+        var logObj = offsetMap[logName];
+        if(typeof logObj == "object")
+        {
+            var keys = Object.keys(logObj);
+            return keys;
+        }
+
+        return [];
+    };
+
     return{
         getIdFromName_ : getIdFromName,
         getFieldOffSetByName_ :getFieldOffsetByName,
-        getFieldOffSetById_  : getFieldOffsetById
+        getFieldOffSetById_  : getFieldOffsetById,
+        getLogsList_ : getLogsList,
+        getParamsForLog_ : getParamsForLog
     }
 }());

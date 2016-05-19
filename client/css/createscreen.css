@@ -226,11 +226,11 @@
     width: 100%;
 }
 
-.createscreen-confsidepanel-content .createscreen-csdropdown .btn-group button{
+.createscreen-confsidepanel-content .btn-group button{
     width: 100% !important;
     text-align: center;
     font-family: "High Tower Text";
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .createscreen-confsidepanel-footer .btn{

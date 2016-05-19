@@ -66,6 +66,7 @@ IWApp.CreateScreen = {
         Blaze.render(Template.dashboard, $(".main-content")[0]);
     },
     OnApplyClick: function(){
+        IWApp.DataBind.BindDataScreen(IWApp.CreateScreen.UserInterface, $(".createscreen-drawarea-board"), "PK");
         console.log("Apply Clicked");
     },
     OnUndoClicked: function(){
@@ -73,6 +74,64 @@ IWApp.CreateScreen = {
     },
     OnRedoClicked: function(){
         console.log("Redo Clicked");
+    },
+    // -- The expected element is the btn-group class element --
+    PopulateButtonDropDown: function(element, listValues, listDStrings){
+        // -- If no separate display strings are given, use the values itself --
+        listDStrings = listDStrings || listValues;
+
+        var listElement = $(element).find("ul");
+        if(listElement.length > 0 && listValues.length > 0){
+            // -- Clear the list --
+            $(listElement).empty();
+
+            // -- Now, populate --
+            var li;
+            for(var i = 0; i < listValues.length; i++){
+                li = $("<li>");
+
+                $(li).text(listDStrings[i]);
+                $(li).attr("data-value", listValues[i]);
+
+                $(listElement).append(li);
+            }
+
+            $(element).find("button").text(listDStrings[0]);
+            $(element).find("button").attr("data-value", listValues[0]);
+
+            $(listElement).find("li").on("click", function(){
+                IWApp.CreateScreen.OnBDDLElementClicked($(this));
+            });
+        }
+    },
+    OnBDDLElementClicked: function(listElement){
+        var ul = $(listElement).parent();
+        var nearestButton = $(ul).siblings(".btn");
+
+        if(nearestButton.length > 0){
+            nearestButton = $(nearestButton)[0];
+            $(nearestButton).text($(listElement).text());
+            $(nearestButton).attr("data-value", $(listElement).attr("data-value"));
+
+            var pkParent = $(nearestButton).parent();
+            if(Number($(pkParent).attr("data-csconfig-datafieldsimple-logname")) == 1){
+                // -- Now, populate the Params Log list --
+                var paramsList = logHelpers.getParamsForLog_($(listElement).text());
+                if(paramsList.length > 0){
+                    var displayStrings = [];
+                    for(var i = 0; i < paramsList.length; i++){
+                        var tempStr = paramsList[i];
+                        if(tempStr.indexOf("My") >= 0){
+                            tempStr = tempStr.split("My");
+                            tempStr = tempStr[1];
+                        }
+
+                        displayStrings.push(tempStr);
+                    }
+                }
+                IWApp.CreateScreen.PopulateButtonDropDown($("[data-csconfig-datafieldsimple-fieldname]"), paramsList, displayStrings);
+            }
+        }
     },
     CloneElementToDA: function(element, position, size){
         // -- Currently, we want to actually clone the element in the div, so do that --
@@ -229,10 +288,9 @@ IWApp.CreateScreen = {
                     appendedElement.find('p').css({fontSize: element.UIObject.properties.fontsize + "px"});
 
                     // -- Update color --
-                    console.log(element.UIObject.properties.color);
                     appendedElement.find('p').css({color: element.UIObject.properties.color});
 
-                    IWApp.CreateScreen.RenderConfigFromElement(element);
+                    // IWApp.CreateScreen.RenderConfigFromElement(element);
 
                     break;
                 }
@@ -291,7 +349,7 @@ IWApp.CreateScreen = {
                     appendedElement.css({width: element.UIObject.size.width, height: element.UIObject.size.height});
                     appendedElement.css({left: element.UIObject.position.left + 7, top: element.UIObject.position.top + 7});
 
-                    IWApp.CreateScreen.RenderConfigFromElement(element);
+                    // IWApp.CreateScreen.RenderConfigFromElement(element);
 
                     break;
                 }
@@ -368,6 +426,21 @@ IWApp.CreateScreen = {
 
                     break;
                 }
+                case IWApp.CreateScreen.ElementClasses.FIELD:{
+                    parElement = $(".createscreen-config-datafieldsimple");
+
+                    // -- Update the list by triggering the click handler --
+                    var list = $(parElement).find("[data-csconfig-datafieldsimple-logname]").find("ul");
+                    list = $(list)[0];
+                    var listElements = $(list).find("li");
+                    for(var i = 0; i < listElements.length; i++){
+                        if($(listElements[i]).attr("data-value").toUpperCase() == element.DataObjects[0].logName.toUpperCase()){
+                            $(listElements[i]).trigger("click");
+                        }
+                    }
+
+                    break;
+                }
                 default:{
                     // -- Do Nothing --
                 }
@@ -439,6 +512,15 @@ IWApp.CreateScreen = {
                         break;
                     }
                     case IWApp.CreateScreen.ElementClasses.FIELD:{
+                        // -- Save the log Name --
+                        var simpleDF = $(".createscreen-config-datafieldsimple");
+                        if(simpleDF.length > 0){
+                            element.DataObjects[0].logName = $(simpleDF).find("[data-csconfig-datafieldsimple-logname] button").text();
+                            element.DataObjects[0].logFieldName = $(simpleDF).find("[data-csconfig-datafieldsimple-fieldname] button").attr("data-value");
+                        }
+
+                        IWApp.CreateScreen.RenderElementToView(element, view);
+
                         break;
                     }
                 }
@@ -519,6 +601,9 @@ IWApp.CreateScreen = {
         $(".createscreen-confsidepanel-footer .btn").click(function(){
             IWApp.CreateScreen.OnConfigSaved();
         });
+
+        var listValues = logHelpers.getLogsList_();
+        IWApp.CreateScreen.PopulateButtonDropDown($("[data-csconfig-datafieldsimple-logname]"), listValues, listValues);
     }
 };
 
