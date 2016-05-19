@@ -151,29 +151,119 @@ IWApp.CreateScreen = {
                 }
             }
 
-            IWApp.CreateScreen.RenderElementToView(screenElement, $(".createscreen-drawarea-board"));
+            IWApp.CreateScreen.UserInterface.Elements.push(screenElement);
+
+            var elRef = IWApp.CreateScreen.GetElementByID(id);
+            IWApp.CreateScreen.RenderElementToView(elRef, $(".createscreen-drawarea-board"));
         }
     },
     RenderElementToView: function(element, view){
         // -- Note: Currently, assuming that the view is a relatively placed item. If not additional calculations are required --
         var positionType = $(view).css("position");
+        var appendedElement, newEle;
         if(positionType.toLowerCase() == "relative"){
             var type = Number(element.type);
             switch(type){
                 case IWApp.CreateScreen.ElementClasses.LABEL:{
-                    var newEle = IWApp.Elements.CreateLabel();
+                    appendedElement = $(view).find("#" + element.id);
+                    if(appendedElement.length == 0){
+                        newEle = IWApp.Elements.CreateLabel();
 
-                    // -- Set the text from the properties --
-                    $(newEle).find('p').text(element.UIObject.properties.text);
+                        // -- Set the text from the properties --
+                        $(newEle).find('p').text(element.UIObject.properties.text);
 
-                    $(newEle).attr("id", element.id);
+                        $(newEle).attr("id", element.id);
 
-                    // -- Append it to the parent --
-                    $(view).append($(newEle));
+                        // -- Append it to the parent --
+                        $(view).append($(newEle));
 
-                    $(view).find("#" + element.id).css({position: "absolute"});
-                    $(view).find("#" + element.id).css({width: element.UIObject.size.width, height: element.UIObject.size.height});
-                    $(view).find("#" + element.id).css({left: element.UIObject.position.left + 7, top: element.UIObject.position.top + 7});
+                        appendedElement = $(view).find("#" + element.id);
+
+                        // -- Now, set that element to be draggable --
+                        $(appendedElement).draggable({
+                            containment: "parent",
+                            stop: function(event, ui){
+                                var pos = $(this).position();
+
+                                // -- Update the position of the dragged element --
+                                element.UIObject.position.top = pos.top;
+                                element.UIObject.position.left = pos.left;
+                            }
+                        });
+
+                        // -- Now, set the element to be resizable --
+                        $(appendedElement).resizable({
+                            animate: true,
+                            containment: "parent",
+                            resize: function(event, ui){
+                                var size = $(ui).size();
+
+                                // -- Update the size of the element --
+                                element.UIObject.size.width = size.width;
+                                element.UIObject.size.height = size.height;
+                            }
+                        });
+                    }
+
+                    // -- Update the label text --
+                    $(appendedElement).find('p').text(element.UIObject.properties.text);
+
+                    // -- Update the Position And the Size --
+                    appendedElement.css({position: "absolute"});
+                    appendedElement.css({width: element.UIObject.size.width, height: element.UIObject.size.height});
+                    appendedElement.css({left: element.UIObject.position.left + 7, top: element.UIObject.position.top + 7});
+
+                    break;
+                }
+                case IWApp.CreateScreen.ElementClasses.FIELD:{
+                    appendedElement = $(view).find("#" + element.id);
+                    if(appendedElement.length == 0){
+                        newEle = IWApp.Elements.CreateField();
+
+                        // -- Set the text from the properties --
+                        $(newEle).find('p').text(element.DataObjects[0].logFieldName);
+
+                        $(newEle).attr("id", element.id);
+
+                        // -- Append it to the parent --
+                        $(view).append($(newEle));
+
+                        appendedElement = $(view).find("#" + element.id);
+
+                        // -- Now, set that element to be draggable --
+                        $(appendedElement).draggable({
+                            containment: "parent",
+                            stop: function(event, ui){
+                                var pos = $(this).position();
+
+                                // -- Update the position of the dragged element --
+                                element.UIObject.position.top = pos.top;
+                                element.UIObject.position.left = pos.left;
+                            }
+                        });
+
+                        // -- Now, set the element to be resizable --
+                        $(appendedElement).resizable({
+                            animate: true,
+                            containment: "parent",
+                            resize: function(event, ui){
+                                var size = $(ui).size();
+
+                                // -- Update the size of the element --
+                                element.UIObject.size.width = size.width;
+                                element.UIObject.size.height = size.height;
+                            }
+                        });
+                    }
+
+                    // -- Update the Actual data into the field --
+                    var text = element.DataObjects[0].resultValue || "Data-Field";
+                    $(appendedElement).find('p').text(text);
+
+                    // -- Update the Position And the Size --
+                    appendedElement.css({position: "absolute"});
+                    appendedElement.css({width: element.UIObject.size.width, height: element.UIObject.size.height});
+                    appendedElement.css({left: element.UIObject.position.left + 7, top: element.UIObject.position.top + 7});
 
                     break;
                 }
@@ -182,19 +272,42 @@ IWApp.CreateScreen = {
 
         }
 
-        $(view).find("div").on("click", function(){
+        $(view).find("div").on("click", function(event){
             IWApp.CreateScreen.OnElementSelected($(this));
-        })
+            event.stopPropagation();
+        });
+    },
+    GetElementByID: function(id){
+        for(var i = 0; i < IWApp.CreateScreen.UserInterface.Elements.length; i++){
+            if(IWApp.CreateScreen.UserInterface.Elements[i].id == id){
+                return IWApp.CreateScreen.UserInterface.Elements[i];
+            }
+        }
+    },
+    UpdateElementData: function(id, data){
+        // -- Write this, if you feel the actual object is not being updated --
+        // -- Coz, as far as i'm aware objects are passed by reference --
     },
     OnElementSelected: function(element){
         // -- First remove the active class for all other elements --
         $(".createscreen-drawarea-board div").removeClass("createscreen-board-activeelement");
 
+        // -- Now, the element specific action --
+        var type = Number($(element).attr("data-etype"));
+        if(typeof type == "undefined" || type == IWApp.CreateScreen.ElementClasses.UNKNOWN){
+            return;
+        }
         // -- Now, set the active class for the clicked element --
         $(element).addClass("createscreen-board-activeelement");
+        var configWindows = $(".createscreen-configwindow").find(".createscreen-sidepanel-content");
+        $(configWindows).removeClass("hide show");
+        $(configWindows).addClass("hide");
 
-        // -- Now, the element specific action --
-
+        for(var i = 0; i < configWindows.length; i++){
+            if(Number($(configWindows[i]).attr("data-etype")) == type){
+                $(configWindows[i]).addClass("show");
+            }
+        }
     },
     PopulateDragTools: function(){
         // -- First things first, clear the drag tools list --
@@ -218,6 +331,13 @@ IWApp.CreateScreen = {
 
         // -- Set the flag to true --
         IWApp.CreateScreen.DragToolsPopulated = true;
+    },
+    OnDrawAreaClicked: function(){
+        $(".createscreen-drawarea-board").find("div").removeClass("createscreen-board-activeelement");
+
+        var configWindows = $(".createscreen-configwindow").find(".createscreen-sidepanel-content");
+        $(configWindows).removeClass("hide show");
+        $(configWindows).addClass("hide");
     },
     InitializeDragTools: function(){
         // -- First things first, create them --
@@ -279,7 +399,14 @@ IWApp.CreateScreen = {
         });
 
         // -- Setup IDs for the side panels --
-        $(".createscreen-label-config").attr("data-etype", IWApp)
+        $(".createscreen-config-elabel").attr("data-etype", IWApp.CreateScreen.ElementClasses.LABEL);
+
+        $(".createscreen-config-datafieldsimple").attr("data-etype", IWApp.CreateScreen.ElementClasses.FIELD);
+
+        // -- Setup the event handlers for the draw area --
+        $(".createscreen-drawarea-board").click(function(event){
+            IWApp.CreateScreen.OnDrawAreaClicked();
+        });
     }
 };
 

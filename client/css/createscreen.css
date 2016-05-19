@@ -141,3 +141,78 @@
     -moz-box-shadow: 0px 1px 0px 6px rgba(35,138,173,1);
     box-shadow: 0px 1px 0px 6px rgba(35,138,173,1);
 }
+
+.createscreen-sidepanel-content .form-group{
+    height: auto;
+    min-height: 40px;
+
+    margin: 0;
+
+    padding-bottom: 8px;
+    padding-top: 8px;
+
+    margin-bottom: 8px;
+    margin-top: 8px;
+
+    margin-left: 8px;
+    margin-right: 8px;
+    overflow: hidden;
+    background-color: dimgrey;
+    -webkit-box-shadow: 0px 1px 9px 1px rgba(26,47,54,1);
+    -moz-box-shadow: 0px 1px 9px 1px rgba(26,47,54,1);
+    box-shadow: 0px 1px 9px 1px rgba(26,47,54,1);
+}
+
+.createscreen-config-labelinputbox,
+.createscreen-config-labeltext{
+    width: 100%;
+    height: auto;
+}
+
+.createscreen-config-labeltext p{
+    width: 90%;
+    margin-left: 5%;
+    text-align: start;
+    color: whitesmoke;
+    font-family: "Lucida Console";
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.createscreen-config-labelinputbox input{
+    width: 90%;
+    margin-left: 5%;
+    text-align: start;
+    background-color: transparent;
+    color: whitesmoke;
+    font-size: 1.2em;
+}
+
+.createscreen-sidepanel-content .createscreen-csdropdown{
+    padding: 10px;
+
+    margin-bottom: 8px;
+    margin-top: 8px;
+
+    margin-left: 5%;
+    width: 90%;
+
+    height: auto;
+    min-height: 40px;
+
+    background-color: dimgrey;
+    -webkit-box-shadow: 0px 1px 9px 1px rgba(26,47,54,1);
+    -moz-box-shadow: 0px 1px 9px 1px rgba(26,47,54,1);
+    box-shadow: 0px 1px 9px 1px rgba(26,47,54,1);
+}
+
+.createscreen-sidepanel-content .createscreen-csdropdown .btn-group{
+    width: 100%;
+}
+
+.createscreen-sidepanel-content .createscreen-csdropdown .btn-group button{
+    width: 100% !important;
+    text-align: center;
+    font-family: "High Tower Text";
+    font-size: 1.2em;
+}
