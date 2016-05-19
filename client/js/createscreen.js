@@ -6,6 +6,7 @@ IWApp = (typeof IWApp == "undefined")?({}):IWApp;
 
 IWApp.CreateScreen = {
     ICONSRequired: ["ICONHome", "ICONApply", "ICONUndo", "ICONRedo"],
+    SelectedID: "",
     ElementClasses: {
         LABEL: 0,
         FIELD: 1,
@@ -111,9 +112,13 @@ IWApp.CreateScreen = {
                     screenElement.UIObject.size.width = size.width;
                     screenElement.UIObject.size.height = size.height;
 
-                    screenElement.UIObject.properties.text = actElement.find("p").text();
+                    screenElement.UIObject.properties.text = $("[data-csconfig-elabel-label]").find("input").attr("data-defvalue");
+                    screenElement.UIObject.properties.fontsize = $("[data-csconfig-elabel-fontsize]").find("input").attr("data-defvalue");
+                    screenElement.UIObject.properties.color = $("[data-csconfig-elabel-color]").find("input").attr("data-defvalue");
+
                     // -- Remember, you need to overwrite the position and size over the class --
                     screenElement.UIObject.properties.class = $(actElement).attr('class');
+
                     break;
                 }
                 case IWApp.CreateScreen.ElementClasses.ACTION:{
@@ -155,6 +160,8 @@ IWApp.CreateScreen = {
 
             var elRef = IWApp.CreateScreen.GetElementByID(id);
             IWApp.CreateScreen.RenderElementToView(elRef, $(".createscreen-drawarea-board"));
+
+            IWApp.CreateScreen.OnDrawAreaClicked();
         }
     },
     RenderElementToView: function(element, view){
@@ -203,6 +210,11 @@ IWApp.CreateScreen = {
                                 element.UIObject.size.height = size.height;
                             }
                         });
+
+                        $(newEle).on("click", function(event){
+                            IWApp.CreateScreen.OnElementSelected($(this));
+                            event.stopPropagation();
+                        });
                     }
 
                     // -- Update the label text --
@@ -212,6 +224,15 @@ IWApp.CreateScreen = {
                     appendedElement.css({position: "absolute"});
                     appendedElement.css({width: element.UIObject.size.width, height: element.UIObject.size.height});
                     appendedElement.css({left: element.UIObject.position.left + 7, top: element.UIObject.position.top + 7});
+
+                    // -- Update the Font size --
+                    appendedElement.find('p').css({fontSize: element.UIObject.properties.fontsize + "px"});
+
+                    // -- Update color --
+                    console.log(element.UIObject.properties.color);
+                    appendedElement.find('p').css({color: element.UIObject.properties.color});
+
+                    IWApp.CreateScreen.RenderConfigFromElement(element);
 
                     break;
                 }
@@ -254,6 +275,11 @@ IWApp.CreateScreen = {
                                 element.UIObject.size.height = size.height;
                             }
                         });
+
+                        $(newEle).on("click", function(event){
+                            IWApp.CreateScreen.OnElementSelected($(this));
+                            event.stopPropagation();
+                        });
                     }
 
                     // -- Update the Actual data into the field --
@@ -265,17 +291,14 @@ IWApp.CreateScreen = {
                     appendedElement.css({width: element.UIObject.size.width, height: element.UIObject.size.height});
                     appendedElement.css({left: element.UIObject.position.left + 7, top: element.UIObject.position.top + 7});
 
+                    IWApp.CreateScreen.RenderConfigFromElement(element);
+
                     break;
                 }
             }
         }else{
 
         }
-
-        $(view).find("div").on("click", function(event){
-            IWApp.CreateScreen.OnElementSelected($(this));
-            event.stopPropagation();
-        });
     },
     GetElementByID: function(id){
         for(var i = 0; i < IWApp.CreateScreen.UserInterface.Elements.length; i++){
@@ -299,13 +322,55 @@ IWApp.CreateScreen = {
         }
         // -- Now, set the active class for the clicked element --
         $(element).addClass("createscreen-board-activeelement");
-        var configWindows = $(".createscreen-configwindow").find(".createscreen-sidepanel-content");
+        var configWindows = $(".createscreen-configwindow").find(".createscreen-confsidepanel-content");
         $(configWindows).removeClass("hide show");
         $(configWindows).addClass("hide");
 
+        var shown = false;
         for(var i = 0; i < configWindows.length; i++){
             if(Number($(configWindows[i]).attr("data-etype")) == type){
                 $(configWindows[i]).addClass("show");
+                shown = true;
+                break;
+            }
+        }
+
+        IWApp.CreateScreen.SelectedID = $(element).attr("id");
+
+        if(shown){
+            // -- Now, update the config values from the element --
+            var uiElement = IWApp.CreateScreen.GetElementByID($(element).attr("id"));
+
+            if(uiElement instanceof IWApp.CreateScreen.Element){
+                IWApp.CreateScreen.RenderConfigFromElement(uiElement);
+
+                $(".createscreen-confsidepanel-footer").removeClass("show hide");
+                $(".createscreen-confsidepanel-footer").addClass("show");
+            }
+        }
+    },
+    RenderConfigFromElement: function(element){
+        if(element instanceof IWApp.CreateScreen.Element){
+            var type = Number(element.type);
+            var typeSpecifier = -1;
+            var parElement;
+            switch(type){
+                case IWApp.CreateScreen.ElementClasses.LABEL:{
+                    // -- Update the label text --
+                    parElement = $(".createscreen-config-elabel");
+
+                    // -- Update the label text --
+                    $(parElement).find("[data-csconfig-elabel-label] .createscreen-config-labelinputbox").find("input").val(element.UIObject.properties.text);
+
+                    // -- Similarly, update the font size and the color --
+                    $(parElement).find("[data-csconfig-elabel-fontsize] .createscreen-config-labelinputbox").find("input").val(element.UIObject.properties.fontsize);
+                    $(parElement).find("[data-csconfig-elabel-color] .createscreen-config-labelinputbox").find("input").val(element.UIObject.properties.color);
+
+                    break;
+                }
+                default:{
+                    // -- Do Nothing --
+                }
             }
         }
     },
@@ -335,9 +400,52 @@ IWApp.CreateScreen = {
     OnDrawAreaClicked: function(){
         $(".createscreen-drawarea-board").find("div").removeClass("createscreen-board-activeelement");
 
-        var configWindows = $(".createscreen-configwindow").find(".createscreen-sidepanel-content");
+        var configWindows = $(".createscreen-configwindow").find(".createscreen-confsidepanel-content");
         $(configWindows).removeClass("hide show");
         $(configWindows).addClass("hide");
+
+        $(".createscreen-confsidepanel-footer").removeClass("show hide");
+        $(".createscreen-confsidepanel-footer").addClass("hide");
+
+        IWApp.CreateScreen.SelectedID = "";
+    },
+    OnConfigSaved: function(){
+        if(IWApp.CreateScreen.SelectedID != ""){
+            var id = IWApp.CreateScreen.SelectedID;
+            var element = IWApp.CreateScreen.GetElementByID(id);
+            var view = $(".createscreen-drawarea-board");
+
+            var type = element.type;
+            if(typeof type != "undefined" || type == IWApp.CreateScreen.ElementClasses.UNKNOWN){
+                switch(type){
+                    case IWApp.CreateScreen.ElementClasses.LABEL:{
+                        // -- Label Name --
+                        element.UIObject.properties.text = $("[data-csconfig-elabel-label] input").val();
+
+                        // -- Font Size --
+                        var fsize = Number($("[data-csconfig-elabel-fontsize] input").val());
+                        if(fsize != 0){
+                            element.UIObject.properties.fontsize = fsize;
+                        }
+
+                        // -- color --
+                        var color = $("[data-csconfig-elabel-color] input").val();
+                        if(color != ""){
+                            element.UIObject.properties.color = color;
+                        }
+
+                        IWApp.CreateScreen.RenderElementToView(element, view);
+
+                        break;
+                    }
+                    case IWApp.CreateScreen.ElementClasses.FIELD:{
+                        break;
+                    }
+                }
+            }else{
+                return;
+            }
+        }
     },
     InitializeDragTools: function(){
         // -- First things first, create them --
@@ -406,6 +514,10 @@ IWApp.CreateScreen = {
         // -- Setup the event handlers for the draw area --
         $(".createscreen-drawarea-board").click(function(event){
             IWApp.CreateScreen.OnDrawAreaClicked();
+        });
+
+        $(".createscreen-confsidepanel-footer .btn").click(function(){
+            IWApp.CreateScreen.OnConfigSaved();
         });
     }
 };
