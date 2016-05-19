@@ -51,6 +51,7 @@ WebSocketReader= (function(){
     /*	reads the message , identifies whether it is ASCII or BINARY and calls the appropriate read function */
     var readMessage = function(data, index)
     {
+        //console.log("data.length,index------------",data.byteLength,index);
         var dataview = new jDataView(data, index);
 
         var arr_buff = new Uint8Array(dataview.byteLength);
@@ -353,7 +354,7 @@ WebSocketReader= (function(){
 
     var mergePackets = function(packetData, packetData2, length)
     {
-        var message_id = packetData.getUint16(4,true);
+        /*var message_id = packetData.getUint16(4,true);
         var ints = new Uint8Array(packetData.byteLength+length);
         var i = 0;
         for (; i < packetData.byteLength; i++)
@@ -366,17 +367,43 @@ WebSocketReader= (function(){
         }
         var arrBufferMerged = jDataView.wrapBuffer(ints);
         var dataviewNew = new DataView(arrBufferMerged);
+        return dataviewNew;*/
+
+
+
+        var ab = new ArrayBuffer(packetData.byteLength+length);
+        var ints = new Uint8Array(ab);
+        var i = 0;
+        for (; i < packetData.byteLength; i++)
+        {
+            ints[i] = packetData.getUint8(i);
+        }
+        for (var k = 0; k < length; k++,i++)
+        {
+            ints[i] = packetData2.getUint8(k);
+        }
+        var arrBufferMerged = jDataView.wrapBuffer(ab);
+        var dataviewNew = new DataView(arrBufferMerged);
         return dataviewNew;
     };
 
     var gen_array_buffer = function(dataview, index)
     {
-        var ints = new Uint8Array(dataview.byteLength - index);
+        /*var ints = new Uint8Array(dataview.byteLength - index);
         for (var i = index; i < dataview.byteLength; i++)
         {
             ints[i] = dataview.getUint8(i);
         }
         var arrBuffer = jDataView.wrapBuffer(ints);
+        return arrBuffer;*/
+
+        var ab = new ArrayBuffer(dataview.byteLength - index);
+        var ints = new Uint8Array(ab);
+        for (var i = index; i < dataview.byteLength; i++)
+        {
+            ints[i] = dataview.getUint8(i);
+        }
+        var arrBuffer = jDataView.wrapBuffer(ab);
         return arrBuffer;
     }
 
