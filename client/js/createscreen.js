@@ -36,14 +36,14 @@ IWApp.CreateScreen = {
     },
     DataObject: function(){
         this.logName = "";
-        this.logID = "";
+        // this.logID = "";
         this.logFieldName= "";
-        this.logFieldOffset = "";
-        this.logFieldSize = "";
-        this.logFieldType = "";
-        this.repeatField = false;
-        this.repeatOffset = "";
-        this.repeatSize = "";
+        // this.logFieldOffset = "";
+        // this.logFieldSize = "";
+        // this.logFieldType = "";
+        // this.repeatField = false;
+        // this.repeatOffset = "";
+        // this.repeatSize = "";
         this.resultValue = "";
     },
     ComplexDataObjects: function(){
