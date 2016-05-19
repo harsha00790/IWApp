@@ -33,7 +33,7 @@ Meteor.startup(() => {
     function passDataTOParserOnInterval()
     {
         var buffer;
-        console.log("startIndex---",startIndex);
+        //console.log("startIndex---",startIndex);
         if(startIndex < bufferLength)
         {
             buffer = gpsArrayBufferData.slice(startIndex,startIndex+cutOff);
