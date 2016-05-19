@@ -22,7 +22,7 @@ Meteor.startup(() => {
     }
 
     //Reading the GPS FILE Data from private folder using assets.
-    var dataBuffer = new Buffer(Assets.getBinary("LogList.GPS"));
+    var dataBuffer = new Buffer(Assets.getBinary("bestpos.GPS"));
 
     //converting the Buffer data to ArrayBuffer required by the generic Parser
     var gpsArrayBufferData = toArrayBuffer(dataBuffer);
@@ -33,7 +33,7 @@ Meteor.startup(() => {
     function passDataTOParserOnInterval()
     {
         var buffer;
-        //console.log("startIndex---",startIndex);
+        console.log("startIndex---",startIndex);
         if(startIndex < bufferLength)
         {
             buffer = gpsArrayBufferData.slice(startIndex,startIndex+cutOff);
@@ -41,6 +41,7 @@ Meteor.startup(() => {
         }
         else
         {
+            startIndex = 0;
             buffer = gpsArrayBufferData.slice(startIndex,cutOff);
         }
         //Passing the ArrayBuffer data to generic parser to get the logs.
