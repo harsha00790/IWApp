@@ -15,7 +15,8 @@ IWApp.CreateScreen = {
         UNKNOWN: 4
     },
     CustomClassElements: {
-        POLARGRID: 0
+        POLARGRID: 0,
+        MAP: 1
     },
     ActionClassElements: {
         BUTTON: 0
@@ -467,6 +468,9 @@ IWApp.CreateScreen = {
         element = IWApp.Elements.CreateField();
         ulist.append(element);
 
+        // element = IWApp.Elements.CreateMap();
+        // ulist.append(element);
+
         // -- Set the flag to true --
         IWApp.CreateScreen.DragToolsPopulated = true;
     },
@@ -535,7 +539,7 @@ IWApp.CreateScreen = {
 
         // -- First, make all the li in the drag tools kit draggable --
         var uList = $(".createscreen-dragtools-list");
-        $(".createscreen-dragtools-list div").draggable({
+        $(".createscreen-dragtools-list>div").draggable({
             opacity: 0.9,
             helper: function(ev, ui) {
                 var $elem = $(this);

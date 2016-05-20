@@ -53,4 +53,26 @@ IWApp.Elements = {
 
         return li;
     },
+    CreateMap: function(){
+        var element, container;
+        container = $("<div>");
+
+        container.addClass("createscreen-container-map");
+        container.addClass("createscreen-dragtools-element-bg");
+
+        var p = $("<div>");
+        p.append($("<p>"));
+        p.addClass("createscreen-map-label");
+        // "https://developers.google.com/chart/interactive/docs/gallery/map#geocoded-locations"
+
+        element = IWApp.Elements.CreateField();
+        container.append(element);
+        element = IWApp.Elements.CreateField();
+        container.append(element);
+
+        container.attr("data-etype", IWApp.CreateScreen.ElementClasses.CUSTOM);
+        container.attr("data-etype", IWApp.CreateScreen.CustomClassElements.MAP);
+
+        return container;
+    }
 };
