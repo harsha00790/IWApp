@@ -110,10 +110,22 @@ IWApp.DashBoard = {
         a.appendTo(element);
         element.appendTo($(parent));
 
+        var columns = (Number($(parent).width()) - 300)/ 60;
+
         $(parent).gridly({
             base: 60, // px
             gutter: 20, // px
-            columns: 12
+            columns: columns
+        });
+
+        $(parent).on("resize", function(){
+            var columns = (Number($(this).width()) - 300) / 60;
+
+            $(this).gridly({
+                base: 60, // px
+                gutter: 20, // px
+                columns: columns
+            });
         });
     }
 };
