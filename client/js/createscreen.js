@@ -121,8 +121,8 @@ IWApp.CreateScreen = {
                     var displayStrings = [];
                     for(var i = 0; i < paramsList.length; i++){
                         var tempStr = paramsList[i];
-                        if(tempStr.indexOf("My") >= 0){
-                            tempStr = tempStr.split("My");
+                        if(tempStr.indexOf("MY") >= 0){
+                            tempStr = tempStr.split("MY");
                             tempStr = tempStr[1];
                         }
 
