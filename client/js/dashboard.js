@@ -10,6 +10,7 @@ IWApp = (typeof IWApp == "undefined")?({}):IWApp;
 
 IWApp.DashBoard = {
     ICONSRequired: ["ICONAdd", "ICONRemove", "ICONEdit", "ICONHelp"],
+    Screens: [],
     OnADDClick: function(){
         // var view = Blaze.getView($(".main-content"))[0];
         // Blaze.remove(view);
@@ -25,6 +26,95 @@ IWApp.DashBoard = {
     },
     OnHelpClicked: function(){
         console.log("Help Clicked");
+    },
+    AddScreenToDashBoard: function(screen){
+
+    },
+    AddImageToDashBoard: function(img){
+
+    },
+    InitializeDummyDashBoard: function(){
+        var element, div, a, img;
+
+        var parent = $(".gridly");
+
+        element = $("<div>");
+        element.addClass("brick large");
+        img = $("<img>");
+        img.attr("src", "dashboard/bg-constellation.JPG");
+        img.appendTo(element);
+        a = $("<a>");
+        a.addClass("delete");
+        a.attr("href", "#");
+        a.text("x");
+        a.appendTo(element);
+        element.appendTo($(parent));
+
+        element = $("<div>");
+        element.addClass("brick large");
+        img = $("<img>");
+        img.attr("src", "dashboard/bg-dop.JPG");
+        img.appendTo(element);
+        a = $("<a>");
+        a.addClass("delete");
+        a.attr("href", "#");
+        a.text("x");
+        a.appendTo(element);
+        element.appendTo($(parent));
+
+        element = $("<div>");
+        element.addClass("brick large");
+        img = $("<img>");
+        img.attr("src", "dashboard/bg-gpstracking.JPG");
+        img.appendTo(element);
+        a = $("<a>");
+        a.addClass("delete");
+        a.attr("href", "#");
+        a.text("x");
+        a.appendTo(element);
+        element.appendTo($(parent));
+
+        element = $("<div>");
+        element.addClass("brick large");
+        img = $("<img>");
+        img.attr("src", "dashboard/bg-glonasstracking.JPG");
+        img.appendTo(element);
+        a = $("<a>");
+        a.addClass("delete");
+        a.attr("href", "#");
+        a.text("x");
+        a.appendTo(element);
+        element.appendTo($(parent));
+
+        element = $("<div>");
+        element.addClass("brick large");
+        img = $("<img>");
+        img.attr("src", "dashboard/bg-position.JPG");
+        img.appendTo(element);
+        a = $("<a>");
+        a.addClass("delete");
+        a.attr("href", "#");
+        a.text("x");
+        a.appendTo(element);
+        element.appendTo($(parent));
+
+        element = $("<div>");
+        element.addClass("brick large");
+        img = $("<img>");
+        img.attr("src", "dashboard/bg-beidoutracking.JPG");
+        img.appendTo(element);
+        a = $("<a>");
+        a.addClass("delete");
+        a.attr("href", "#");
+        a.text("x");
+        a.appendTo(element);
+        element.appendTo($(parent));
+
+        $(parent).gridly({
+            base: 60, // px
+            gutter: 20, // px
+            columns: 12
+        });
     }
 };
 
@@ -35,4 +125,6 @@ Template.dashboard.rendered = function(){
         "ICONEdit": IWApp.DashBoard.OnEditClicked,
         "ICONHelp": IWApp.DashBoard.OnHelpClicked
     });
+
+    IWApp.DashBoard.InitializeDummyDashBoard();
 };
